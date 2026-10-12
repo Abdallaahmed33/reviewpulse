@@ -1,8 +1,23 @@
 # 📊 ReviewPulse
 
-Customer review intelligence platform: ingest reviews via API or CSV, classify sentiment with NLP, cluster recurring complaints into topics, and explore everything in a live dashboard.
+**Updated, production-style version** of my ITI graduation project [AI Customer Feedback Intelligence](https://github.com/Abdallaahmed33/ai-customer-feedback-intelligence).
+
+The original system was a notebook + trained ML models + a static HTML dashboard + a small Flask demo. ReviewPulse is the same problem, rebuilt as a real app: ingest live reviews, score sentiment, cluster complaints, and explore everything in a dashboard.
 
 ![CI](https://github.com/Abdallaahmed33/reviewpulse/actions/workflows/ci.yml/badge.svg)
+
+## What changed vs the original
+
+| Original (ITI) | ReviewPulse (this repo) |
+|---|---|
+| Jupyter notebook on a fixed CSV (~22k clothing reviews) | FastAPI app: one review or bulk CSV upload |
+| Logistic Regression / Random Forest / Naive Bayes | Hugging Face multilingual sentiment (Arabic + English) or a lexicon fallback |
+| K-Means complaint categories in the notebook | TF-IDF + KMeans on **your** negative reviews, on demand |
+| Static `dashboard.html` | Live Streamlit dashboard (JWT login) |
+| Flask `app.py` / CLI `predict.py` | REST API with auth, Swagger (`/docs`), admin user management |
+| Saved `.pkl` artifacts | PostgreSQL (SQLite locally), GitHub Actions CI, pytest |
+
+Original write-up and models: [ai-customer-feedback-intelligence](https://github.com/Abdallaahmed33/ai-customer-feedback-intelligence)
 
 ## Features
 - **FastAPI** REST API with JWT authentication and Swagger docs (`/docs`)
